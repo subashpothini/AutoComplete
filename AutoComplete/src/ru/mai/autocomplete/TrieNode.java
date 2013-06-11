@@ -5,9 +5,9 @@ import java.util.Set;
 import java.util.TreeMap;
 import java.util.TreeSet;
 
-public class TrieNode<K> {
+public class TrieNode<K> implements Comparable<TrieNode<K>> {
     private final int id;
-    private final Map<Character, TrieNode> next;
+    private final Map<Character, TrieNode<K>> next;
     private final Set<K> endsHere, endsBelow;
 
     public TrieNode(int id) {
@@ -22,11 +22,11 @@ public class TrieNode<K> {
         return id;
     }
 
-    public TrieNode getNext(Character c) {
+    public TrieNode<K> getNext(Character c) {
         return next.get(c);
     }
 
-    public void putNext(Character c, TrieNode node) {
+    public void putNext(Character c, TrieNode<K> node) {
         next.put(c, node);
     }
 
@@ -36,5 +36,10 @@ public class TrieNode<K> {
 
     public Set<K> getEndsBelow() {
         return endsBelow;
+    }
+
+    @Override
+    public int compareTo(TrieNode<K> o) {
+        return Integer.compare(getId(), o.getId());
     }
 }
