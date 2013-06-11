@@ -5,9 +5,11 @@ import org.junit.Test;
 
 public class TrieNodeTest {
     @Test
-    public void testF() throws Exception {
-        TrieNode node = new TrieNode();
+    public void testFactory() throws Exception {
+        FactoryTrieNode<Integer> factory = new FactoryTrieNode<>();
 
-        Assert.assertEquals(node.f(), 1);
+        // Check that two TrieNodes from same factory has different id's.
+        TrieNode<Integer> first = factory.produce(), second = factory.produce();
+        Assert.assertTrue(first.getId() != second.getId());
     }
 }
