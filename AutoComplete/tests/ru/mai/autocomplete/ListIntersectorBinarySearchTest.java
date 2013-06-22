@@ -6,7 +6,7 @@ import org.junit.Test;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ListIntersectorTest {
+public class ListIntersectorBinarySearchTest {
     @Test
     public void testGetIntersection() throws Exception {
         {
@@ -25,7 +25,7 @@ public class ListIntersectorTest {
             result.add(1);
             result.add(2);
 
-            ListIntersector<Integer> intersector = new ListIntersector<>();
+            ListIntersector<Integer> intersector = new ListIntersectorBinarySearch<>();
             intersector.addList(first);
             intersector.addList(second);
 
@@ -47,7 +47,7 @@ public class ListIntersectorTest {
             result.add(0);
             result.add(1);
 
-            ListIntersector<Integer> intersector = new ListIntersector<>();
+            ListIntersector<Integer> intersector = new ListIntersectorBinarySearch<>();
             intersector.addList(first);
             intersector.addList(second);
 
@@ -66,7 +66,7 @@ public class ListIntersectorTest {
             List<Integer> result = new ArrayList<>();
             result.add(1);
 
-            ListIntersector<Integer> intersector = new ListIntersector<>();
+            ListIntersector<Integer> intersector = new ListIntersectorBinarySearch<>();
             intersector.addList(first);
             intersector.addList(second);
 
@@ -96,7 +96,7 @@ public class ListIntersectorTest {
             result.add(2);
             result.add(10);
 
-            ListIntersector<Integer> intersector = new ListIntersector<>();
+            ListIntersector<Integer> intersector = new ListIntersectorBinarySearch<>();
             intersector.addList(first);
             intersector.addList(second);
             intersector.addList(third);
