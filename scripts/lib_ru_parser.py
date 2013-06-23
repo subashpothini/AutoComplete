@@ -1,5 +1,6 @@
 import urllib2
 import re
+import sys
 
 category_url = "http://lib.ru/TALES/"
 re_title = "<title>(.+)<\/title>"
@@ -20,53 +21,43 @@ def good_url(url):
 def parse_category(url):
   data = http_get(url)
   matches = re.findall(re_author, data)
-  books = []
 
   for match in matches:
     if good_sub_url(match):
       author_url = url + match
-      books.append(parse_author(author_url)) 
+      parse_author(author_url) 
     elif good_url(match):
       author_url = match
-      books.append(parse_author(author_url))
-
-
-  return books
+      parse_author(author_url)
 
 def parse_author(url):
   data = http_get(url)
-  books = []
 
   matches = re.findall(re_txt, data)
   for match in matches:
     book_url = url + match
-    books.append(parse_book_txt(book_url))
+    parse_book_txt(book_url)
 
   matches = re.findall(re_shtml, data)
   for match in matches:
     book_url = url + match
-    books.append(parse_book_shtml(book_url))
+    parse_book_shtml(book_url)
 
-  return books
+  sys.stdout.flush()
 
 def parse_book_txt(url):
   data = http_get(url)
   matches = re.findall(re_title, data)
-  title = matches[0]
-  return [title, url]
+  title = matches[0].decode("koi8-r")
+  print title
+  print url
 
 def parse_book_shtml(url):
   data = http_get(url)
   matches = re.findall(re_title, data)
   title = matches[0]
-  real_title = title[title.index(':') + 2:]
-  return [real_title, url]
-
-books = parse_category(category_url)
-
-for book in books:
-  title = book[0]
-  url = book[1]
-
-  print title
+  real_title = title[title.index(':') + 2:].decode("cp1251")
+  print real_title
   print url
+
+parse_category(category_url)
