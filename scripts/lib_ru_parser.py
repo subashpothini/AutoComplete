@@ -5,6 +5,7 @@ category_url = "http://lib.ru/TALES/"
 re_title = "<title>(.+)<\/title>"
 re_txt = "<A HREF\=([0-9a-zA-Z]+\.txt)>"
 re_author = "<\/small><\/tt> <A HREF=(.+?)><b>.+?<\/b><\/A>"
+re_shtml = "<DL><DT><li><A HREF=(.+?)><b>.+?<\/b><\/A>"
 
 def http_get(url):
   data = urllib2.urlopen(url)
@@ -34,20 +35,32 @@ def parse_category(url):
 
 def parse_author(url):
   data = http_get(url)
-  matches = re.findall(re_txt, data)
   books = []
 
+  matches = re.findall(re_txt, data)
   for match in matches:
     book_url = url + match
-    books.append(parse_book(book_url))
+    books.append(parse_book_txt(book_url))
+
+  matches = re.findall(re_shtml, data)
+  for match in matches:
+    book_url = url + match
+    books.append(parse_book_shtml(book_url))
 
   return books
 
-def parse_book(url):
+def parse_book_txt(url):
   data = http_get(url)
   matches = re.findall(re_title, data)
   title = matches[0]
   return [title, url]
+
+def parse_book_shtml(url):
+  data = http_get(url)
+  matches = re.findall(re_title, data)
+  title = matches[0]
+  real_title = title[title.index(':') + 2:]
+  return [real_title, url]
 
 books = parse_category(category_url)
 
