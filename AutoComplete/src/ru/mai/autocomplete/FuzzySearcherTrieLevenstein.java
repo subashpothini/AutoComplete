@@ -4,8 +4,8 @@ import java.util.Set;
 import java.util.TreeSet;
 
 public class FuzzySearcherTrieLevenstein<T> implements FuzzySearcher<T> {
-    private FactoryTrieNode<T> nodeFactory;
-    private TrieNode<T> root;
+    private final FactoryTrieNode<T> nodeFactory;
+    private final TrieNode<T> root;
 
     public FuzzySearcherTrieLevenstein() {
         nodeFactory = new FactoryTrieNode<>();

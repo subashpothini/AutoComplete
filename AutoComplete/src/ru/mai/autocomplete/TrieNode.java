@@ -1,21 +1,21 @@
 package ru.mai.autocomplete;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
-import java.util.Set;
 import java.util.TreeMap;
-import java.util.TreeSet;
 
 public class TrieNode<K> implements Comparable<TrieNode<K>> {
     private final int id;
     private final Map<Character, TrieNode<K>> next;
-    private final Set<K> endsHere, endsBelow;
+    private final List<K> endsHere, endsBelow;
 
     public TrieNode(int id) {
         this.id = id;
 
         next = new TreeMap<>();
-        endsHere = new TreeSet<>();
-        endsBelow = new TreeSet<>();
+        endsHere = new ArrayList<>();
+        endsBelow = new ArrayList<>();
     }
 
     public int getId() {
@@ -30,11 +30,11 @@ public class TrieNode<K> implements Comparable<TrieNode<K>> {
         next.put(c, node);
     }
 
-    public Set<K> getEndsHere() {
+    public List<K> getEndsHere() {
         return endsHere;
     }
 
-    public Set<K> getEndsBelow() {
+    public List<K> getEndsBelow() {
         return endsBelow;
     }
 

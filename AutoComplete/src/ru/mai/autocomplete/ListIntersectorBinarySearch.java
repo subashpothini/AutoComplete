@@ -5,7 +5,7 @@ import java.util.Collections;
 import java.util.List;
 
 public class ListIntersectorBinarySearch<V extends Comparable<V>> implements ListIntersector<V> {
-    private List<List<V>> lists;
+    private final List<List<V>> lists;
 
     public ListIntersectorBinarySearch() {
         lists = new ArrayList<>();
