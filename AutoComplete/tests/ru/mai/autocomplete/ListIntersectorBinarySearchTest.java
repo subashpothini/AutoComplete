@@ -103,5 +103,13 @@ public class ListIntersectorBinarySearchTest {
 
             Assert.assertEquals(result, intersector.getIntersection(10));
         }
+
+        {
+            List<Integer> result = new ArrayList<>();
+
+            ListIntersector<Integer> intersector = new ListIntersectorBinarySearch<>();
+
+            Assert.assertEquals(result, intersector.getIntersection(0));
+        }
     }
 }

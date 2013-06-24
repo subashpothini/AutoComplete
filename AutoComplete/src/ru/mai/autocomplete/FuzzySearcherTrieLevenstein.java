@@ -27,10 +27,12 @@ public class FuzzySearcherTrieLevenstein<T> implements FuzzySearcher<T> {
             cursor = cursorNext;
 
             // Add object to set
-            cursor.getEndsBelow().add(object);
+            if (!cursor.getEndsBelow().contains(object))
+                cursor.getEndsBelow().add(object);
         }
 
-        cursor.getEndsHere().add(object);
+        if (!cursor.getEndsHere().contains(object))
+            cursor.getEndsHere().add(object);
     }
 
     private List<TrieNode<T>> getNodes(CharSequence word, int mistakes) {

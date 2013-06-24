@@ -20,7 +20,7 @@ public class StringSpliterImpl implements StringSpliter {
 
             if (delimiters.indexOf(c) != -1) {
                 if (token.length() > 0) {
-                    result.add(token.toString());
+                    result.add(token.toString().toLowerCase());
                     token = new StringBuilder();
                 }
             } else {
@@ -29,7 +29,7 @@ public class StringSpliterImpl implements StringSpliter {
         }
 
         if (token.length() > 0)
-            result.add(token.toString());
+            result.add(token.toString().toLowerCase());
 
         return result;
     }
