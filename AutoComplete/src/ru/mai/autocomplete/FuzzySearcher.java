@@ -1,11 +1,11 @@
 package ru.mai.autocomplete;
 
-import java.util.Set;
+import java.util.List;
 
 public interface FuzzySearcher<T> {
     void addObject(CharSequence word, T object);
 
-    Set<T> getObjects(CharSequence word, int mistakes);
+    List<T> getObjects(CharSequence word, int mistakes);
 
-    Set<T> getObjectsByPrefix(CharSequence prefix, int mistakes);
+    List<T> getObjectsByPrefix(CharSequence prefix, int mistakes);
 }
