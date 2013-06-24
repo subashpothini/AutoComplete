@@ -2,6 +2,7 @@ package ru.mai.gui;
 
 import ru.mai.autocomplete.AutoComplete;
 import ru.mai.autocomplete.AutoCompleteImpl;
+import ru.mai.autocomplete.Result;
 
 import javax.swing.*;
 import javax.swing.event.DocumentEvent;
@@ -33,7 +34,7 @@ public class Main {
     }
 
     private void initAutoComplete(String resourceFileName) {
-        autocomplete = new AutoCompleteImpl<String>();
+        autocomplete = new AutoCompleteImpl<>();
         loadResources(resourceFileName);
     }
 
@@ -54,11 +55,13 @@ public class Main {
             public void action() {
                 String text = input.getText();
 
-                List<String> objects = autocomplete.getObjects(text);
+                List<Result<String>> objects = autocomplete.getObjects(text);
                 output.setText("");
 
-                for (String s : objects)
-                    output.append(s + "\n");
+                for (Result s : objects) {
+                    output.append(s.getText() + "\n");
+                    output.append(s.getObject() + "\n");
+                }
             }
         });
     }
@@ -66,7 +69,7 @@ public class Main {
     private void loadResources(String resourceFileName) {
         try {
             BufferedReader in = new BufferedReader(new FileReader(resourceFileName));
-            String text = null;
+            String text;
 
             while ((text = in.readLine()) != null) {
                 String url = in.readLine();

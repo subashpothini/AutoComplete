@@ -16,7 +16,7 @@ public class ListIntersectorBinarySearch<V extends Comparable<V>> implements Lis
     }
 
     public List<V> getIntersection(int howMuch) {
-        List<V> result = new ArrayList<>(howMuch);
+        List<V> result = new ArrayList<>();
 
         final int n = lists.size();
         int[] currentPositions = new int[n];
