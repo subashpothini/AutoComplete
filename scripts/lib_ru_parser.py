@@ -10,7 +10,15 @@ re_shtml = "<DL><DT><li><A HREF=(.+?)><b>.+?<\/b><\/A>"
 
 def http_get(url):
   data = urllib2.urlopen(url)
-  return data.read()
+  meta = str(data.info())
+  res = str(data.read())
+
+  if "koi8" in meta:
+    res = res.decode("koi8-r")
+  elif "windows" in meta:
+    res = res.decode("cp1251")
+
+  return res
 
 def good_sub_url(url):
   return ("http" not in url) and (url[-1] == "/")
@@ -48,7 +56,7 @@ def parse_author(url):
 def parse_book_txt(url):
   data = http_get(url)
   matches = re.findall(re_title, data)
-  title = matches[0].decode("koi8-r")
+  title = matches[0]
   print title
   print url
 
@@ -56,7 +64,7 @@ def parse_book_shtml(url):
   data = http_get(url)
   matches = re.findall(re_title, data)
   title = matches[0]
-  real_title = title[title.index(':') + 2:].decode("cp1251")
+  real_title = title[title.index(':') + 2:]
   print real_title
   print url
 
