@@ -29,7 +29,7 @@ public class ListIntersectorBinarySearchTest {
             intersector.addList(first);
             intersector.addList(second);
 
-            Assert.assertTrue(intersector.getIntersection(3).equals(result));
+            Assert.assertEquals(result, intersector.getIntersection(3));
         }
 
         {
@@ -51,7 +51,7 @@ public class ListIntersectorBinarySearchTest {
             intersector.addList(first);
             intersector.addList(second);
 
-            Assert.assertTrue(intersector.getIntersection(2).equals(result));
+            Assert.assertEquals(result, intersector.getIntersection(2));
         }
 
         {
@@ -70,7 +70,7 @@ public class ListIntersectorBinarySearchTest {
             intersector.addList(first);
             intersector.addList(second);
 
-            Assert.assertTrue(intersector.getIntersection(2).equals(result));
+            Assert.assertEquals(result, intersector.getIntersection(2));
         }
 
         {
@@ -101,7 +101,7 @@ public class ListIntersectorBinarySearchTest {
             intersector.addList(second);
             intersector.addList(third);
 
-            Assert.assertTrue(intersector.getIntersection(10).equals(result));
+            Assert.assertEquals(result, intersector.getIntersection(10));
         }
     }
 }
