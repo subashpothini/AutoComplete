@@ -53,6 +53,9 @@ public class ListIntersectorBinarySearch<V extends Comparable<V>> implements Lis
     }
 
     private boolean isEnd(int[] currentPositions) {
+        if(currentPositions.length == 0)
+            return true;
+
         for (int i = 0; i < currentPositions.length; i++)
             if (currentPositions[i] >= lists.get(i).size())
                 return true;
